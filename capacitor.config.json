@@ -1,0 +1,6 @@
+{
+  "appId": "com.insurance.system",
+  "appName": "نظام التأمينات",
+  "webDir": "www",
+  "server": { "androidScheme": "https" }
+}
