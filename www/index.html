@@ -45,7 +45,7 @@ aside.col{width:74px}aside.col .bt,aside.col .t,aside.col .nav h6,aside.col .ni 
 .btn.w{background:rgba(255,255,255,.18);color:#fff;border:1px solid rgba(255,255,255,.35);box-shadow:none}
 .btn.sm{padding:5px 10px;font-size:12.5px;border-radius:8px}.ibt{width:30px;height:30px;padding:0;justify-content:center;border-radius:8px}
 .card{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:18px;box-shadow:var(--sh);transition:transform .2s,box-shadow .2s}
-.grid{display:grid;gap:16px}.k4{grid-template-columns:repeat(auto-fit,minmax(215px,1fr))}.k3{grid-template-columns:repeat(auto-fit,minmax(310px,1fr))}.mt{margin-top:16px}
+.grid{display:grid;gap:16px}.k4{grid-template-columns:repeat(auto-fit,minmax(min(100%,215px),1fr))}.k3{grid-template-columns:repeat(auto-fit,minmax(min(100%,310px),1fr))}.mt{margin-top:16px}
 .kpi{display:flex;gap:14px;align-items:center}.kpi:hover{transform:translateY(-3px)}
 .kpi .ic{width:50px;height:50px;border-radius:14px;display:grid;place-items:center;color:#fff;box-shadow:0 8px 16px rgba(0,0,0,.15)}
 .kpi b{font-size:22px;display:block;line-height:1.2}.kpi span{color:var(--mut);font-size:12.5px}
@@ -98,6 +98,21 @@ input:focus,select:focus{outline:0;border-color:var(--pri);box-shadow:0 0 0 3px 
 .lform{padding:34px}.lform label{display:block;margin:12px 0 4px;color:var(--mut);font-size:12.5px}.le{color:var(--bad);min-height:20px;margin-top:8px;font-size:13px;font-weight:600}.lform a{color:var(--pri);font-weight:700}
 @media(max-width:700px){.lbox{grid-template-columns:1fr}.lside{padding:24px}}
 @media(max-width:900px){.app{display:block}aside{position:fixed;inset-block:0;inset-inline-start:0;transform:translateX(100%);width:260px}aside.show{transform:none}aside.col{width:260px}.gsb span,.gsb kbd{display:none}.gsb{flex:0;margin:0}.top{padding:10px 14px}#view{padding:14px}.fg{grid-template-columns:1fr}.hero .hq{margin:0}}
+html{overflow-x:hidden}
+@media(max-width:900px){
+.app{max-width:100vw}
+aside{right:0;left:auto;visibility:hidden;transform:translateX(105%);transition:transform .25s,visibility 0s linear .25s}
+aside.show{visibility:visible;transform:none;transition:transform .25s,visibility 0s}
+body.sbo::after{content:"";position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:24}
+.top{flex-wrap:wrap;row-gap:8px;padding:8px 12px}
+.crumb{flex:1;min-width:0;margin:0;font-size:15px}.crumb small{display:none}
+.gsb{flex:0 0 auto;padding:8px;margin:0}
+#act{order:9;flex:0 0 100%;margin:0;flex-wrap:nowrap;overflow-x:auto;padding-bottom:2px}#act .btn{flex-shrink:0}
+.ib{width:36px;height:36px}
+.hero{padding:16px}.hero .hq{width:100%;margin:0}
+.grid[style*='minmax(300px,400px)']{grid-template-columns:1fr!important}
+.tool input,.tool select{min-width:0;flex:1 1 140px}
+}
 @media print{@page{size:A4 landscape;margin:10mm}aside,.top,.noprint,#modal,#toast,#drawer,#splash,.btn{display:none!important}body,.card{background:#fff!important;color:#000!important;box-shadow:none!important}}
 </style>
 </head>
@@ -201,7 +216,7 @@ let AL=[];
 const alH=()=>{AL=alerts();return AL.map((a,i)=>`<button class='al ${a.s}' onclick=aGo(${i})><i>${ic(a.i,18)}</i><span>${a.t}</span></button>`).join('')||`<p class=mut>${ic('check',16)} لا توجد تنبيهات، كل شيء سليم.</p>`};
 function aGo(i){closeM();const a=AL[i];if(a.g=='emp'){flt={c:'',s:'',q:'',x:a.x||''};ep=0}nv(a.g)}
 function bellM(){openM(`<h3>${ic('bell',20)} التنبيهات</h3>${alH()}<div class=row><button class='btn s' onclick=closeM()>إغلاق</button></div>`,460)}
-function nv(v){RC=null;go(v);$('side').classList.remove('show')}
+function nv(v){RC=null;go(v);$('side').classList.remove('show');document.body.classList.remove('sbo')}
 function go(v){cur=v;if(v!='rec')RC=null;
 $('nav').innerHTML=NAV.map(g=>`<h6>${g[0]}</h6>`+g[1].map(x=>{const b=x[0]=='req'?Q().filter(q=>q.status==QS[0]).length:0;return`<button class='ni ${x[0]==v?'on':''}' onclick=nv('${x[0]}')>${ic(x[1],19)}<span class=t>${x[2]}</span>${b?`<span class=bd>${b}</span>`:''}</button>`}).join('')).join('');
 $('crumb').innerHTML=`${VT[v]}<small>${VG[v]} / ${VT[v]}</small>`;
@@ -209,7 +224,8 @@ const A={...ACTX,comp:`<button class=btn onclick=editC()>${ic('plus',16)} شرك
 $('act').innerHTML=(A[v]||'')+(v=='set'?'':`<button class='btn s' onclick=prt()>${ic('print',16)} طباعة / تصدير</button>`);
 const n=alerts().length;$('bell').innerHTML=ic('bell',18)+(n?`<span class=dot>${n}</span>`:'');
 $('view').style.animation='none';$('view').offsetHeight;$('view').style.animation='';$('view').innerHTML=R[v]();anim()}
-function tgs(){const s=$('side');if(innerWidth<900)s.classList.toggle('show');else s.classList.toggle('col')}
+function tgs(){const s=$('side');if(innerWidth<=900){s.classList.toggle('show');document.body.classList.toggle('sbo',s.classList.contains('show'))}else s.classList.toggle('col')}
+document.addEventListener('click',e=>{if(e.target===document.body&&document.body.classList.contains('sbo')){$('side').classList.remove('show');document.body.classList.remove('sbo')}});
 function th(){const r=document.documentElement,d=r.dataset.theme?r.dataset.theme=='dark':matchMedia('(prefers-color-scheme:dark)').matches,n=d?'light':'dark';r.dataset.theme=n;try{localStorage.setItem('ins_theme',n)}catch(x){}$('thb').innerHTML=ic(n=='dark'?'sun':'moon',18)}
 function gs(){openM(`<div class=sbox>${ic('search',18)}<input id=gq placeholder='ابحث عن موظف أو شركة أو صفحة…' autocomplete=off></div><div id=gr class=gr></div>`,560);
 const run=()=>{const q=$('gq').value.trim();let h='';
