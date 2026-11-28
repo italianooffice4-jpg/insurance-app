@@ -1,6 +1,7 @@
 {
-  "appId": "com.insurance.system",
-  "appName": "نظام التأمينات",
+  "appId": "com.aman.system",
+  "appName": "Aman System",
   "webDir": "www",
-  "server": { "androidScheme": "https" }
+  "server": { "androidScheme": "https" },
+  "android": { "allowMixedContent": false }
 }

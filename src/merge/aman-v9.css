@@ -1,0 +1,219 @@
+/* ============================================================================
+   Aman System v9 — طبقة التصميم المعتمد فوق واجهة النسخة 8.x
+   تُحمَّل بعد الـ <style> الأصلي، فتتغلب عليه بدون المساس بمنطق الصفحات.
+   الألوان والخطوط والقرارات: HANDOFF.md §1 و §6
+   ============================================================================ */
+
+/* ---------- 1) الألوان: الليلي (الافتراضي) والنهاري ---------- */
+:root,:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#100e17;--card:#1c182b;--tx:#f8fafc;--mut:#9d96b8;--bd:#28233d;
+  --pri:#7c3aed;--pri2:#0d9488;--ok:#34d399;--bad:#f87171;--warn:#fbbf24;--info:#38bdf8;
+  --side:#13111c;--sidetx:#b9b3d1;
+  --sh:0 2px 4px rgba(0,0,0,.3),0 8px 20px rgba(0,0,0,.35);
+  --surface:#181524;--elev:#201c30;--subtle:#27223b;--bd2:#342e4f;
+  --pri-glow:rgba(124,58,237,.25);--acc-glow:rgba(13,148,136,.25);
+}
+:root[data-theme="light"]{
+  color-scheme:light;
+  --bg:#f4f6fa;--card:#ffffff;--tx:#0f172a;--mut:#64748b;--bd:#e2e8f0;
+  --pri:#6366f1;--pri2:#0d9488;--ok:#16a34a;--bad:#dc2626;--warn:#d97706;--info:#0284c7;
+  --side:#ffffff;--sidetx:#475569;
+  --sh:0 1px 3px rgba(0,0,0,.05),0 4px 12px rgba(0,0,0,.06);
+  --surface:#ffffff;--elev:#f8fafc;--subtle:#e2e8f0;--bd2:#cbd5e1;
+  --pri-glow:rgba(99,102,241,.15);--acc-glow:rgba(13,148,136,.15);
+}
+
+/* ---------- 2) الخطوط: Plex للنص، Cairo للعناوين والأزرار، monospace للأرقام ---------- */
+body{font-family:'IBM Plex Sans Arabic',Cairo,Tahoma,Arial,sans-serif}
+h1,h2,h3,.btn,.ni,.crumb,.brand b,.wmb,.tag,.kpi b,.chip,.dv h4,.ec-tab,.dvk b{font-family:Cairo,'IBM Plex Sans Arabic',Tahoma,sans-serif}
+.mono,td.a9n,.a9n{font-family:ui-monospace,'Cascadia Mono',Consolas,monospace;letter-spacing:.4px;direction:ltr;unicode-bidi:plaintext}
+
+/* ---------- 3) الشريط الجانبي ---------- */
+aside{background:var(--side);border-inline-start:1px solid var(--bd)}
+.brand{color:var(--tx)}
+.nav h6{color:var(--mut)}
+.ni{color:var(--sidetx);border:1px solid transparent}
+.ni:hover{background:var(--subtle);color:var(--tx)}
+.ni.on{background:linear-gradient(90deg,var(--pri-glow),transparent);color:var(--tx);border-color:var(--pri);box-shadow:0 0 18px var(--pri-glow);font-weight:700}
+.ni .bd{background:var(--subtle);color:var(--tx);border:1px solid var(--bd2)}
+.sf{color:var(--mut);border-top-color:var(--bd)}
+.lt{background:transparent;box-shadow:none;padding:0;border-radius:0}
+.lt img{filter:drop-shadow(0 4px 14px var(--acc-glow))}
+
+/* ---------- 4) الشريط العلوي والأزرار والبطاقات ---------- */
+.top{background:var(--side)}
+.ib{background:var(--surface)}
+.gsb{background:var(--surface)}
+.btn{background:linear-gradient(135deg,var(--pri),color-mix(in srgb,var(--pri) 70%,var(--pri2)));box-shadow:0 4px 14px var(--pri-glow)}
+.btn.s{background:var(--surface);box-shadow:none}
+.btn.d{background:var(--bad)}
+.card{background:var(--card);border-radius:18px;box-shadow:var(--sh)}
+th{background:var(--surface)}
+input,select,textarea{background:var(--surface)}
+.mb,.dw{background:var(--card)}
+.mb{border:1px solid var(--bd2)}
+#modal{background:rgba(8,6,14,.7)}
+.pg div{background:var(--surface)}
+.tag.a{background:color-mix(in srgb,var(--ok) 16%,transparent);color:var(--ok)}
+.tag.r{background:color-mix(in srgb,var(--bad) 16%,transparent);color:var(--bad)}
+.tag.w{background:color-mix(in srgb,var(--warn) 16%,transparent);color:var(--warn)}
+.tag.i{background:color-mix(in srgb,var(--info) 16%,transparent);color:var(--info)}
+
+/* ---------- 5) شاشة الدخول والتحميل ---------- */
+.lside{background:linear-gradient(135deg,#1e1b4b,#4c1d95 48%,#0d9488)}
+#splash{background:linear-gradient(135deg,#100e17,#1e1b4b 55%,#0b3b3a)}
+
+/* ---------- 6) لوحة التحكم (dv) ---------- */
+.dv-greet{margin:0 0 4px;font-size:24px;font-weight:800}
+.dv-sub{color:var(--mut);margin:0 0 18px;font-size:13.5px}
+.dv-kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:16px}
+.dvk{background:var(--card);border:1.5px solid var(--acc-glow);border-radius:18px;padding:16px 18px 10px;position:relative;overflow:hidden;
+  box-shadow:0 0 0 1px color-mix(in srgb,var(--kc) 35%,transparent),0 8px 24px color-mix(in srgb,var(--kc) 14%,transparent);border-color:var(--kc);transition:transform .2s}
+.dvk:hover{transform:translateY(-3px)}
+.dvk small{display:block;color:var(--mut);font-size:12.5px}
+.dvk b{display:block;font-size:26px;line-height:1.25;margin:2px 0}
+.dvk .dl{font-size:12px;color:var(--kc);min-height:18px}
+.dvk svg.sp{display:block;width:100%;height:46px;margin-top:6px}
+.dv-quick{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:14px;margin-top:16px}
+.dv-quick button{background:var(--surface);color:var(--tx);border:1px solid var(--bd2);border-radius:12px;padding:13px;font:inherit;font-family:Cairo,sans-serif;font-weight:700;cursor:pointer;transition:.18s}
+.dv-quick button:hover{border-color:var(--pri);box-shadow:0 0 16px var(--pri-glow);transform:translateY(-2px)}
+.dv-row{display:grid;gap:16px;margin-top:16px}
+.dv-r2{grid-template-columns:minmax(0,2fr) minmax(0,1fr)}
+.dv-r3{grid-template-columns:repeat(3,minmax(0,1fr));align-items:start}
+@media(max-width:1100px){.dv-r2,.dv-r3{grid-template-columns:1fr}}
+.dvp{background:var(--card);border:1.5px solid var(--bd2);border-radius:18px;padding:18px;box-shadow:var(--sh);min-width:0}
+.dvp.v{border-color:color-mix(in srgb,var(--pri) 55%,var(--bd2));box-shadow:0 0 22px var(--pri-glow)}
+.dvp.t{border-color:color-mix(in srgb,var(--pri2) 55%,var(--bd2));box-shadow:0 0 22px var(--acc-glow)}
+.dvp h4{margin:0 0 12px;font-size:15px;font-weight:700;display:flex;align-items:center;gap:8px}
+.dv-area{width:100%;height:190px;display:block}
+.dv-axis{display:flex;justify-content:space-between;color:var(--mut);font-size:11.5px;margin-top:4px}
+.dv-don{display:flex;align-items:center;gap:22px;flex-wrap:wrap;justify-content:center}
+.dv-don .donut{margin:0;width:128px;height:128px}.dv-don .donut span{width:86px;height:86px;font-size:20px;font-family:Cairo,sans-serif}
+.dv-leg{display:grid;gap:8px;font-size:13px}.dv-leg i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-inline-end:8px}
+.dv-row3 .it{display:flex;align-items:center;gap:10px;padding:9px 10px;background:var(--surface);border:1px solid var(--bd);border-radius:10px;margin-bottom:8px}
+.dv-row3 .it span{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dv-ops .op{position:relative;padding:4px 18px 10px 0;border-bottom:1px solid var(--bd);margin-bottom:8px}
+.dv-ops .op::before{content:"";position:absolute;inset-inline-start:0;top:9px;width:8px;height:8px;border-radius:50%;background:var(--pri2)}
+.dv-ops .op:nth-child(odd)::before{background:var(--pri)}
+.dv-ops .op small{display:block;color:var(--mut)}
+.dv-ai{display:flex;flex-direction:column;height:100%}
+.dv-ai .chips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}
+.dv-ai .am{flex:1;min-height:88px;max-height:190px;overflow:auto;margin-bottom:8px}
+.dv-ai .row{display:flex;gap:8px}
+.chip{background:var(--surface);border:1px solid var(--bd2);color:var(--tx);border-radius:20px;padding:5px 12px;font-size:12px;cursor:pointer;font-family:inherit}
+.chip:hover{border-color:var(--pri2);color:var(--pri2)}
+.ab{background:var(--surface);border:1px solid var(--bd);border-radius:12px;padding:9px 12px;margin:6px 0;font-size:13px;line-height:1.6}
+.ab.u{background:color-mix(in srgb,var(--pri) 18%,var(--card));border-color:var(--pri)}
+.ab .acts{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+
+/* ---------- 7) بطاقة الموظف المنبثقة (ec) ---------- */
+.ec-head{display:flex;gap:14px;align-items:center;margin-bottom:14px}
+.ec-head .av{width:62px;height:62px;font-size:22px;font-family:Cairo,sans-serif}
+.ec-head h3{margin:0;font-size:19px}
+.ec-head .sp{margin-inline-start:auto;display:flex;gap:8px}
+.ec-tabs{display:flex;gap:4px;border-bottom:1px solid var(--bd);margin-bottom:14px;overflow-x:auto}
+.ec-tab{background:none;border:0;border-bottom:3px solid transparent;color:var(--mut);padding:9px 14px;font-size:13.5px;font-weight:600;cursor:pointer;white-space:nowrap}
+.ec-tab.on{color:var(--tx);border-bottom-color:var(--pri2)}
+.ec-pane{display:none}.ec-pane.on{display:block}
+.ec-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.ec-grid div{background:var(--surface);border:1px solid var(--bd);border-radius:11px;padding:9px 12px;min-width:0}
+.ec-grid small{display:block;color:var(--mut);font-size:11.5px}
+.ec-grid b{display:block;word-break:break-word;font-weight:600}
+.ec-calc{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:0 0 12px}
+.ec-calc div{border:1px solid var(--bd2);border-radius:12px;padding:10px 12px;background:var(--surface)}
+.ec-calc div.hl{border-color:var(--pri2);box-shadow:0 0 14px var(--acc-glow)}
+.ec-calc small{color:var(--mut);display:block;font-size:11.5px}.ec-calc b{font-size:17px;font-family:Cairo,sans-serif}
+.ec-note{font-size:12.5px;color:var(--warn);background:color-mix(in srgb,var(--warn) 12%,transparent);border-radius:10px;padding:8px 12px;margin:8px 0}
+.ec-foot{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px;padding-top:14px;border-top:1px solid var(--bd)}
+.ec-doc{display:flex;gap:8px;align-items:center;padding:8px 0;border-bottom:1px solid var(--bd)}
+.ec-doc span:nth-child(2){flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.mkc{cursor:pointer;border-bottom:1px dotted var(--mut)}
+.a9-np{font-size:12px;margin-top:5px;color:var(--pri2);min-height:16px}.a9-np.bad{color:var(--bad)}
+
+/* ---------- 8) الإضافة الجانبية للمساعد (مظهر المحادثة المنبثقة) ---------- */
+#chatbox{background:var(--card);border:1px solid var(--bd2)}
+#chatbox .cb .ab{margin:8px 0 0}
+
+/* ---------- 9) النهاري: الشريط الجانبي الأبيض ---------- */
+:root[data-theme="light"] .ni.on{color:var(--pri)}
+:root[data-theme="light"] .dvk,:root[data-theme="light"] .dvp{box-shadow:var(--sh)}
+:root[data-theme="light"] .dvp.v,:root[data-theme="light"] .dvp.t{box-shadow:var(--sh)}
+:root[data-theme="light"] .lside{background:linear-gradient(135deg,#1e40af,#0d9488)}
+
+@media print{
+  aside,.top,#chatfab,#chatbox,.dv-quick{display:none!important}
+}
+
+
+/* ---------- رسم بياني حقيقي (v9.1) ---------- */
+.dv-chart h4{margin-bottom:10px}
+.ctabs{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:8px}.ctabs .sp1{flex:1}
+.ctab{border:1px solid var(--bd2,var(--bd));background:transparent;color:var(--mut);border-radius:999px;padding:4px 12px;font:inherit;font-size:12px;cursor:pointer}
+.ctab.on{background:var(--pri);border-color:var(--pri);color:#fff}
+.cht{display:block;width:100%;height:auto;direction:ltr}
+.cht .gl{stroke:var(--bd);stroke-width:1;stroke-dasharray:3 4}.cht .gl.z{stroke:var(--mut);stroke-dasharray:none;opacity:.7}
+.cht .ax{fill:var(--mut);font-size:11px;font-family:inherit}.cht .ax.on{fill:var(--tx);font-weight:700}
+.cht .vl{fill:var(--tx);font-size:10.5px;font-weight:700;font-family:inherit}
+.cnote{font-size:11.5px;color:var(--mut);margin:6px 0 10px;line-height:1.7}.up2{color:var(--warn)}
+.clg{display:flex;gap:14px;font-size:12px;color:var(--mut);margin-bottom:4px}.clg i{display:inline-block;width:14px;height:4px;border-radius:2px;margin-inline-end:6px;vertical-align:middle}
+.ctb{font-size:12.5px}.ctb tr{cursor:pointer}.ctb tr.sel td{background:var(--subtle)}.ctb .up{color:var(--ok)}.ctb .dn{color:var(--bad)}.ctb .mut{color:var(--mut)}
+.cdet{background:var(--elev,var(--subtle));border:1px solid var(--bd);border-radius:12px;padding:10px 14px;margin:8px 0;font-size:13px}
+.cdi{padding:3px 0}.cdi small{color:var(--mut)}
+.cbars{display:flex;flex-direction:column;gap:5px;margin-top:10px}.cbars>div{position:relative;height:20px;border-radius:6px;background:var(--subtle);overflow:hidden;display:flex;align-items:center;justify-content:space-between;padding:0 8px;font-size:11px}
+.cbars i{position:absolute;inset-block:0;inset-inline-start:0;background:color-mix(in srgb,#34d399 35%,transparent)}.cbars span,.cbars b{position:relative}
+
+/* ---------- اختيار المستندات المودعة ---------- */
+.dpl{display:grid;grid-template-columns:1fr 1fr;gap:6px 12px;margin:10px 0}
+.mb label.dpi{display:flex;align-items:center;gap:8px;margin:0;padding:8px 10px;border:1px solid var(--bd);border-radius:10px;color:var(--tx);font-size:13px;cursor:pointer}
+.mb label.dpi:hover{border-color:var(--pri)}.dpi input{width:auto;accent-color:var(--pri2)}.dpi span{flex:1}.dpi small{font-size:10px}
+.dpx{color:var(--bad);cursor:pointer;padding:0 4px}.dpa{display:flex;gap:8px;margin-top:6px}
+@media(max-width:560px){.dpl{grid-template-columns:1fr}}
+
+/* ---------- صورة المستخدم (v10) ---------- */
+.ib.has-photo{padding:0;overflow:hidden;border-color:var(--pri)}
+.ub-img,.av-img{width:100%;height:100%;object-fit:cover;display:block}
+.av-img{border-radius:50%;flex-shrink:0;border:2px solid var(--pri)}
+.avw{position:relative;flex-shrink:0}
+.avc{position:absolute;inset-block-end:-2px;inset-inline-end:-4px;width:26px;height:26px;border-radius:50%;border:2px solid var(--card);background:var(--pri);color:#fff;display:grid;place-items:center;cursor:pointer;padding:0}
+
+/* ---------- قراءة البطاقة OCR (v10) ---------- */
+.ocr-btns{display:contents}
+.ocr-ov{position:fixed;inset:0;background:rgba(15,12,25,.65);z-index:95;display:grid;place-items:center;padding:16px;overflow:auto}
+.ocr-pg{width:min(420px,100%)}
+.ocr-rv{width:min(720px,100%)}
+.oprev{display:flex;gap:10px;flex-wrap:wrap;margin:8px 0}.oprev img{height:120px;border-radius:8px;border:1px solid var(--bd);background:#fff}
+.ogrid{display:grid;grid-template-columns:1fr 1fr;gap:4px 14px}
+.orow{display:flex;flex-direction:column;gap:3px;margin:6px 0}
+.orow .ock{display:flex;align-items:center;gap:6px;margin:0;color:var(--tx);font-size:12.5px;font-weight:600;cursor:pointer}.orow .ock input{width:auto;accent-color:var(--pri2)}
+.orow small{font-size:11px;color:var(--mut)}.orow .owarn,.owarn{color:var(--warn);font-size:12px}.orow .onid{color:var(--ok)}
+.ocur a{color:var(--pri);cursor:pointer;margin-inline-start:6px;text-decoration:underline}
+.oraw{margin-top:10px;font-size:12px}.oraw pre{white-space:pre-wrap;direction:rtl;background:var(--subtle);padding:8px;border-radius:8px;max-height:160px;overflow:auto}
+@media(max-width:620px){.ogrid{grid-template-columns:1fr}}
+
+/* ===== رسم بياني مضغوط + نافذة تفاصيل الشهر ===== */
+.cseg{display:inline-flex;gap:2px;padding:3px;background:var(--subtle);border-radius:999px;flex-wrap:wrap}
+.cseg .ctab{border:0;padding:4px 12px;background:transparent}
+.cseg .ctab.on{background:var(--pri);color:#fff;box-shadow:0 1px 4px rgba(0,0,0,.18)}
+.cht{max-height:210px}
+.cht .hit{fill:transparent;cursor:pointer}.cht .hit:hover{fill:var(--pri);fill-opacity:.07}
+.cfoot{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:11.5px;color:var(--mut);margin-top:6px}
+.cfoot .ctab{white-space:nowrap}
+.cmh{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:12px}
+.cmkp{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px}
+.cmk{background:var(--surface,var(--subtle));border:1px solid var(--bd);border-inline-start:4px solid var(--kc);border-radius:12px;padding:10px 12px;display:flex;flex-direction:column;gap:2px}
+.cmk small{color:var(--mut);font-size:11.5px}.cmk b{font-size:17px}
+.cmk small.up{color:var(--ok)}.cmk small.dn{color:var(--bad)}
+.cmt{margin:14px 0 6px;font-size:13.5px}
+.cml{max-height:240px;overflow:auto;border:1px solid var(--bd);border-radius:12px;padding:6px 12px;background:var(--surface,var(--subtle))}
+.cmn{display:flex;justify-content:space-between;gap:10px;margin-top:14px}
+.ctb .up{color:var(--ok)}.ctb .dn{color:var(--bad)}
+
+/* مراجعة البطاقة: صورة كبيرة بجانب الحقول لتسهيل النقل اليدوي */
+.ocr-rv{width:min(1040px,100%)}
+.orv-b{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:18px;align-items:start;margin-top:8px}
+.orv-b .oprev{position:sticky;top:0;display:flex;flex-direction:column;margin:0}
+.orv-b .oprev img{height:auto;width:100%;cursor:zoom-in}
+@media(max-width:820px){.orv-b{grid-template-columns:1fr}.orv-b .oprev{position:static}}
+.ocr-zoom{position:fixed;inset:0;z-index:120;background:rgba(0,0,0,.88);display:grid;place-items:center;padding:12px;cursor:zoom-out}
+.ocr-zoom img{max-width:100%;max-height:100%;border-radius:10px;background:#fff}
